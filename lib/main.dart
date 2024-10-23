@@ -36,7 +36,6 @@ class _LoginPageState extends State<LoginPage> {
     String password = _passwordController.text;
 
     if (username == 'rafirhn' && password == 'admin123') {
-      // Jika login berhasil, navigasi ke halaman dashboard
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -44,7 +43,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     } else {
-      // Jika login gagal, tampilkan pesan kesalahan
       showDialog(
         context: context,
         builder: (context) {
@@ -110,22 +108,38 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Center(
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurple,
+              ),
               child: Text(
-                'Selamat datang, $username',
-                style: const TextStyle(fontSize: 16),
+                'Menu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
               ),
             ),
-          ),
-        ],
+            ListTile(
+              leading: const Icon(Icons.arrow_back),
+              title: const Text('Back'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                Navigator.pop(context); // Navigate back to the previous page
+              },
+            ),
+          ],
+        ),
       ),
-      body: const Center(
+      body: Center(
         child: Text(
-          'Ini adalah halaman dashboard!',
-          style: TextStyle(fontSize: 24),
+          'Selamat datang, $username!',
+          style: const TextStyle(fontSize: 24),
         ),
       ),
     );
