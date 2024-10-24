@@ -99,12 +99,102 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   final String username;
   const DashboardPage({super.key, required this.username});
 
   @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    List<Widget> _pages = [
+      // Home Page
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Selamat datang, ${widget.username}!',
+              style: const TextStyle(fontSize: 24),
+            ),
+          ],
+        ),
+      ),
+
+      // Pesanan Anda Page
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Daftar Pesanan Anda',
+              style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            Card(
+              child: ListTile(
+                title: const Text('Pesanan 1'),
+                subtitle: const Text('Detail pesanan 1'),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Card(
+              child: ListTile(
+                title: const Text('Pesanan 2'),
+                subtitle: const Text('Detail pesanan 2'),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Card(
+              child: ListTile(
+                title: const Text('Pesanan 3'),
+                subtitle: const Text('Detail pesanan 3'),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      // Profil Page
+      Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Profil Anda',
+              style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Username: rafirhn'),
+            ),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Icon(Icons.email),
+              title: const Text('Email: example@example.com'),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Edit Profil'),
+            ),
+          ],
+        ),
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
@@ -136,11 +226,24 @@ class DashboardPage extends StatelessWidget {
           ],
         ),
       ),
-      body: Center(
-        child: Text(
-          'Selamat datang, $username!',
-          style: const TextStyle(fontSize: 24),
-        ),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'Pesanan Anda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_pin),
+            label: 'Profil',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
