@@ -118,7 +118,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _pages = [
+    List<Widget> pages = [
       // Home Page
       Center(
         child: Column(
@@ -226,7 +226,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       ),
-      body: _pages[_selectedIndex],
+      body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
