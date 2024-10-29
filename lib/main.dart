@@ -238,7 +238,7 @@ class _DashboardPageState extends State<DashboardPage> {
             label: 'Pesanan Anda',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_pin),
+            icon: Icon(Icons.person_outline),
             label: 'Profil',
           ),
         ],
